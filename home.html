@@ -1,0 +1,189 @@
+
+<!-- 文件型態的宣告 -->
+<!DOCTYPE html>
+<html>
+    <!-- 縮牌通常根據標籤的層次 -->
+    <head>
+        <!-- 告訴瀏覽器網頁編碼式utf-8 -->
+        <meta charset="utf-8"/>
+        <title>my first page</title>
+        <style type="text/css">
+            .box{
+                /* transform: rotate(50); */
+                width: 100px;
+                height: 100px;
+                background-color: red;
+                /* 透明度 */
+                opacity: 0.5;
+                /* 圓角 */
+                border-radius: 10px;
+                /* 陰影:參數(x軸位移,y軸位移,陰影擴散,顏色) */
+                box-shadow: 30px 0px 0px #006666;
+                /* 文字陰影text-shadow: ; */
+                
+
+                /* 線性轉換 */
+                /* 位移(x軸 y軸) */
+                transform: translate(100px,0px);
+                /* 放大(x軸倍數,y軸倍數) */
+                transform:scale(1.5,0.5);
+                /* 旋轉(角度) */
+                transform: rotate(45deg);
+                /* 歪斜(角度) */
+                transform: skew(50deg) rotate(10deg);
+            }
+            .cube{
+                /* transform: translate(100px,100px); */
+                display: inline-block;
+            }
+            .cube>.top{
+                width: 240px ;height: 60px ; background-color: #dddddd;
+                transform: skew(-45deg,0) translate(30px,0px);
+            }
+            .cube>.level2{
+                display: flex;
+            }
+            .cube>.level2>.center{
+                flex: none;
+                width: 240px;height: 240px;background-color: #aaaaaa;
+            }
+            .cube>.level2>.right{
+                flex: none;
+                width: 60px;height: 240px;background-color: #888888;
+                transform: skew(0,-45deg) translate(0,-30px);
+            }
+            .application{
+                width: auto;height:auto;background-color: #001989;padding: 10px;margin-bottom: 10px;
+                color:aquamarine;font-style:"微軟正黑體";font-size: 30px;text-align: center;
+            }
+            .Question{
+                border-radius: 10px;
+                width: 80%;background-color:wheat;padding: 10px;margin-bottom: 10px;margin-left: 10%;margin-right: 10%;
+                color: #000;font-style: "微軟正黑體";font-size: 30px;
+            }
+            .ans{
+                border-radius: 10px;;
+                width: 80%;background-color: white;padding: 10px;margin-bottom: 10px;margin-left: 10%;margin-right: 10%;font-size: 15px;line-height: 2;
+                color: #000;font-style: "微軟正黑體";font-size: 22px;
+
+            }
+            body{
+                background-image: url(background.jpg);
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+                
+            }
+            
+
+        </style>
+        <script type="text/javascript">
+            // 網頁載入時執行
+            var cvs,ctx
+            // window.onload=function(){
+            //     cvs = document.getElementById("cvs")
+            //     ctx= cvs.getContext("2d")
+            //     // 顏色
+            //     //fill 填滿 使用fillStyle控制顏色
+            //     ctx.fillStyle="red"
+            //     ctx.fillRect(50,50,100,100,) 
+            //     // 透明度 globalAlpha
+            //     ctx.globalAlpha=0.5
+            //     ctx.fillStyle="pink"
+            //     ctx.fillRect(30,30,100,100)
+            //     //stroke描邊 利用strokeStyle控制顏色
+            //     ctx.globalAlpha=1
+            //     ctx.strokeStyle="blue"
+            //     ctx.strokeRect(200,200,400,400)
+            //     //path 路徑
+            //     ctx.fillStyle="red"
+            //     ctx.beginPath()
+            //     ctx.moveTo(200,100)
+            //     ctx.lineTo(300,300)
+            //     ctx.lineTo(2000,2000)
+            //     ctx.closePath()
+            //     ctx.stroke()
+            //     ctx.fill()
+            //     //載入圖片
+            //     var img = new Image()
+            //     img.src="123.jpg"
+            //     console.log("Ewe")
+            //     img.onload = function(){
+            //         console.log("help")
+            //         ctx.drawImage(this,50,50,cvs.width,cvs.height)
+            //         console.log(img.src)
+            //     }
+            // }
+            function over(element){
+                element.style.color="red"
+            }
+            function out(element){
+                element.style.color="black"
+            }
+            function show(name,url){
+                getMessage(name,url)
+            }
+            function getMessage(name,url){
+                var req=new XMLHttpRequest();
+                //open 參數1是連線的方法，參數2是連線的網址
+                req.open("get",url)
+                //觸發onload代表連線完成，load事件，偵測連線的狀態
+                req.onload=function(){
+                    // alert(this.responseText)
+                    var content = document.getElementById(name)
+                    content.innerHTML=this.responseText
+                }
+                req.send();
+            }
+            let x="e"
+        </script>
+    <!-- 網頁的主畫面都在body內 -->
+    </head>
+    <body>
+        <div class="application">
+            APPLICATION
+        </div>
+        <div style=" text-align:center ">
+        <div class="left" style="display: inline-block ;width: 80%;" >
+            <div class="Question"onmouseover="over(this) " onmouseout="out(this)" onclick="show('question0','https://webber0971.github.io/test1/q0')">個人介紹</div>
+            <div id="question0" class="ans" ></div>
+
+            <div class="Question" onmouseover="over(this) " onmouseout="out(this)" onclick="show('question1','https://webber0971.github.io/test1/q1')">為了成為軟體工程師，曾做過甚麼努力?</div>
+            <div id="question1" class="ans" ></div>
+
+            <div class="Question"onmouseover="over(this) " onmouseout="out(this)" onclick="show('question2','https://webber0971.github.io/test1/q2')">如果餐與這個計畫，會怎麼安排時間?</div>
+            <div id="question2" class="ans" ></div>
+
+            <div class="Question"onmouseover="over(this) " onmouseout="out(this)" onclick="show('question3','https://webber0971.github.io/test1/q3')">是否有想要加入的軟體公司?為什麼想加入該公司?</div>
+            <div id="question3" class="ans" ></div>
+
+            
+            <div class="Question"onmouseover="over(this) " onmouseout="out(this)" onclick="show('question4','https://webber0971.github.io/test1/q4')">請描述一件你曾經遇到最困難的事情，如何克服?</div>
+            <div id="question4" class="ans" ></div>
+
+            <div class="Question"onmouseover="over(this) " onmouseout="out(this)" onclick="show('question5','https://webber0971.github.io/test1/q5')">關於這份申請網站，請分享一個你開發時使用的技術心得</div>
+            <div id="question5" class="ans" ></div>
+
+
+        </div>
+          
+
+
+<!--         
+        <div class="cube">
+
+            <div class="top"></div>
+            <div class="level2">
+                <div class="center"></div>
+                <div class = "right"></div>
+            </div>
+        </div>
+        
+        <canvas id="cvs" width="900" height="600" style="border: 1px solid #000000; opacity: 1;" >
+        </canvas> -->
+        
+       
+    </body>
+
+
+</html>
